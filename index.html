@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/921e89acba.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="imput.css">
+    <title>Document</title>
+</head>
+<body class="m-0 p-0 font-sans box-border text-white bg-blue-950">
+    <div class="m-36 w-11/12 max-w-2xl">
+        <h1 class="font-bold text-4xl">Generate A<br><span class=" border-b-4 text-green-600 border-solid border-green-600 pb-2">Random Password</span></h1>
+        <div class="w-full mt-12 mb-8 bg-white text-white flex items-center justify-between pt-6 pb-5 rounded-md">
+            <input type="text" class="font-semibold ml-5 border-0 outline-none text-2xl text-black" id="password" placeholder="Password">
+            <i class="fa-regular fa-copy text-green-600 mr-5 text-3xl cursor-pointer" id="cpyBtn"></i>
+        </div>
+        <button class="text-white border-0 outline-none bg-green-600 text-xl font-light flex items-center justify-center px-4 py-4 rounded-md cursor-pointer" id="btn"><i class="fa-solid fa-bolt mr-3"></i> Generate Password</button>
+    </div>
+
+    <script>
+        const passwordBox = document.getElementById("password");
+        const butn = document.querySelector("#btn");
+        const cpyBtn = document.querySelector("#cpyBtn");
+        const length = 8;
+        const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+        const number = "0123456789";
+        const symbols = "@#$%^&*()_+{><?=-";
+        const allChars = upperCase + lowerCase + number + symbols;
+
+        const createPassword = () =>{
+            let password = "";
+            password += upperCase[Math.floor(Math.random() * upperCase.length)];
+            password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+            password += number[Math.floor(Math.random() * number.length)];
+            password += symbols[Math.floor(Math.random() * symbols.length)];
+            
+            while(length > password.length){
+                password += allChars[Math.floor(Math.random() * allChars.length)];  
+            }
+            passwordBox.value = password;
+        }
+
+        const copyPassword = () =>{
+            passwordBox.select();
+            document.execCommand("copy");
+
+        }
+        butn.addEventListener("click" , createPassword);
+        cpyBtn.addEventListener("click" , copyPassword);
+    </script>
+</body>
+</html>
